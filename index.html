@@ -76,14 +76,12 @@
 <body class="mixpanel-platform-body">
   <div class="mixpanel-platform-section">
       <div id="dateSelect" style="float: left;"></div>
-      <div style="clear: left"></div>
+      <div style="clear: left">Numerator</div>
       <div id="eventSelect" style="float: left;"></div>
       <div id="propertyType" style="float: left;"></div>
-      <div style="clear: left"></div>
+      <div style="clear: left">Denominator</div>
       <div id="divisorType" style="float: left;"></div>
-      <div style="clear: left"></div>
-      <div id="queryType" style="float: left;"></div>
-      <div style="clear: left"></div>
+      <div style="clear: left">Display type</div>
       <div id="displayType" style="float: left;"></div>
       <div style="clear: left"></div>
       <div id="submit">Run</div>
@@ -127,7 +125,6 @@
 
     var dateSelect = $('#dateSelect').MPDatepicker();
     var eventNameDiv = $('#eventSelect').MPEventSelect();
-    var queryTypeDiv = $('#queryType').MPSelect(queryTypeOptions);
     var displayTypeDiv = $('#displayType').MPSelect(displayTypeOptions);
     var propertyTypeDiv = $('#propertyType').MPSelect(propertyTypeOptions);
     var divisorTypeDiv = $('#divisorType').MPSelect(divisorTypeOptions);
@@ -162,9 +159,8 @@
             while (currentDate < dateRange.to) {
               var timestamp = Math.floor(currentDate.getTime() / 1000);
               var whereString = '(number(properties["Time of Registration"]) >=' + timestamp + ' and number(properties["Time of Registration"]) <=' + (timestamp + 86400) + ' ' + swipeType +')';
-              var queryType = queryTypeDiv.MPSelect('value');
               var params = {
-                type: queryType,
+                type: 'general',
                 where: whereString,
                 unit: 'day',
                 from: currentDate,
@@ -192,7 +188,7 @@
               Promise.all(divisors).then(function(divisorArray){
                 _.each(promiseArray, function(segData, index){
                   var displayType = displayTypeDiv.MPSelect('value');
-                  debugger
+                  
                   cohort = cohorts[index];
                   values = segData.values()[eventName];
                   divisor = divisorArray[index].sum().values()['Signup'];
@@ -271,9 +267,8 @@
             while (currentDate < dateRange.to) {
               var timestamp = Math.floor(currentDate.getTime() / 1000);
               var whereString = '(number(properties["Time of Registration"]) >=' + timestamp + ' and number(properties["Time of Registration"]) <=' + (timestamp + 86400) + ' ' + swipeType +')';
-              var queryType = queryTypeDiv.MPSelect('value');
               var params = {
-                type: queryType,
+                type: 'general',
                 where: whereString,
                 unit: 'day',
                 from: currentDate,
@@ -304,7 +299,7 @@
                   var displayType = displayTypeDiv.MPSelect('value');
                   cohort = cohorts[index];
                   values = segData.values()[eventName];
-                  debugger
+                  
                   divisor = divisorArray[index].sum().values()['Swiped'];
                   console.log(segData.values());
                   data[cohort] = {};
@@ -382,9 +377,8 @@
               var timestamp = Math.floor(currentDate.getTime() / 1000);
               var whereString = '(number(properties["Time of Registration"]) >=' + timestamp + ' and number(properties["Time of Registration"]) <=' + (timestamp + 86400) + ' ' + swipeType +')';
               var whereDivString = '(number(properties["Time of Signup"]) >=' + timestamp + ' and number(properties["Time of Signup"]) <=' + (timestamp + 86400) + ' ' + swipeType +')';
-              var queryType = queryTypeDiv.MPSelect('value');
               var params = {
-                type: queryType,
+                type: 'general',
                 where: whereString,
                 unit: 'day',
                 from: currentDate,
@@ -415,7 +409,7 @@
                   var displayType = displayTypeDiv.MPSelect('value');
                   cohort = cohorts[index];
                   values = segData.values()[eventName];
-                  debugger
+                  
                   divisor = divisorArray[index].sum().values()['One-Click Application Submitted'];
                   console.log(segData.values());
                   data[cohort] = {};
@@ -492,9 +486,8 @@
             while (currentDate < dateRange.to) {
               var timestamp = Math.floor(currentDate.getTime() / 1000);
               var whereString = '(number(properties["Time of Registration"]) >=' + timestamp + ' and number(properties["Time of Registration"]) <=' + (timestamp + 86400) + ' ' + swipeType +')';
-              var queryType = queryTypeDiv.MPSelect('value');
               var params = {
-                type: queryType,
+                type: 'general',
                 where: whereString,
                 unit: 'day',
                 from: currentDate,
@@ -522,7 +515,7 @@
               Promise.all(divisors).then(function(divisorArray){
                 _.each(promiseArray, function(segData, index){
                   var displayType = displayTypeDiv.MPSelect('value');
-                  debugger
+                  
                   cohort = cohorts[index];
                   values = segData.values()[eventName];
                   divisor = divisorArray[index].sum().values()['app-install'];
