@@ -190,7 +190,6 @@
               Promise.all(divisors).then(function(divisorArray){
                 _.each(promiseArray, function(segData, index){
                   var displayType = displayTypeDiv.MPSelect('value');
-                  debugger
                   cohort = cohorts[index];
                   values = segData.values()[eventName];
                   divisor = divisorArray[index].sum().values()['Signup'];
@@ -302,7 +301,6 @@
                   var displayType = displayTypeDiv.MPSelect('value');
                   cohort = cohorts[index];
                   values = segData.values()[eventName];
-                  debugger
                   divisor = divisorArray[index].sum().values()['Swiped'];
                   console.log(segData.values());
                   data[cohort] = {};
@@ -413,7 +411,7 @@
                   var displayType = displayTypeDiv.MPSelect('value');
                   cohort = cohorts[index];
                   values = segData.values()[eventName];
-                  debugger
+                  
                   divisor = divisorArray[index].sum().values()['One-Click Application Submitted'];
                   console.log(segData.values());
                   data[cohort] = {};
@@ -520,7 +518,7 @@
               Promise.all(divisors).then(function(divisorArray){
                 _.each(promiseArray, function(segData, index){
                   var displayType = displayTypeDiv.MPSelect('value');
-                  debugger
+                  
                   cohort = cohorts[index];
                   values = segData.values()[eventName];
                   divisor = divisorArray[index].sum().values()['app-install'];
@@ -601,12 +599,6 @@
      }
      // Actually, run on button click.
      $("#submit").on('click', runQuery);
-
-     $("#propertyType").on('change', function(){
-      if (this.value == "Swiped") {
-        this.toggle();
-      }
-     })
 
      // Export to csv
      function exportToCSV() {
