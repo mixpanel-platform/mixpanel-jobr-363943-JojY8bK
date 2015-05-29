@@ -76,16 +76,18 @@
 <body class="mixpanel-platform-body">
   <div class="mixpanel-platform-section">
       <div id="dateSelect" style="float: left;"></div>
-      <div style="clear: left; font-size:14px; font-weight:800; margin:2px 0 0 2px;">Numerator</div>
+      <div style="clear: left"></div>
       <div id="eventSelect" style="float: left;"></div>
       <div id="propertyType" style="float: left;"></div>
-      <div style="clear: left; font-size:14px; font-weight:800; margin:2px 0 0 2px;">Denominator</div>
+      <div style="clear: left"></div>
       <div id="divisorType" style="float: left;"></div>
-      <div style="clear: left; font-size:14px; font-weight:800; margin:2px 0 0 2px;">Query type</div>
+      <div style="clear: left"></div>
+      <div id="queryType" style="float: left;"></div>
+      <div style="clear: left"></div>
       <div id="displayType" style="float: left;"></div>
-      <div style="clear: left; font-size:14px; font-weight:800; margin:2px 0 0 2px;"></div>
+      <div style="clear: left"></div>
       <div id="submit">Run</div>
-      <div style="clear: left; font-size:14px; font-weight:800; margin:2px 0 0 2px;"></div>
+      <div style="clear: left"></div>
       <div id="export" style="float: left;" onclick="exportToCSV()">Export</div>
       <div style="clear: left"></div>
   </div>
@@ -190,6 +192,7 @@
               Promise.all(divisors).then(function(divisorArray){
                 _.each(promiseArray, function(segData, index){
                   var displayType = displayTypeDiv.MPSelect('value');
+                  debugger
                   cohort = cohorts[index];
                   values = segData.values()[eventName];
                   divisor = divisorArray[index].sum().values()['Signup'];
@@ -301,6 +304,7 @@
                   var displayType = displayTypeDiv.MPSelect('value');
                   cohort = cohorts[index];
                   values = segData.values()[eventName];
+                  debugger
                   divisor = divisorArray[index].sum().values()['Swiped'];
                   console.log(segData.values());
                   data[cohort] = {};
@@ -411,7 +415,7 @@
                   var displayType = displayTypeDiv.MPSelect('value');
                   cohort = cohorts[index];
                   values = segData.values()[eventName];
-                  
+                  debugger
                   divisor = divisorArray[index].sum().values()['One-Click Application Submitted'];
                   console.log(segData.values());
                   data[cohort] = {};
@@ -518,7 +522,7 @@
               Promise.all(divisors).then(function(divisorArray){
                 _.each(promiseArray, function(segData, index){
                   var displayType = displayTypeDiv.MPSelect('value');
-                  
+                  debugger
                   cohort = cohorts[index];
                   values = segData.values()[eventName];
                   divisor = divisorArray[index].sum().values()['app-install'];
