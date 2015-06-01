@@ -166,6 +166,7 @@
                 from: currentDate,
                 to: dateRange.to
               }
+              
               var toDate = new Date(currentDate)
               toDate.setDate(toDate.getDate() + 1)
               var divparams = {
@@ -207,26 +208,36 @@
 
                   if (displayType == 'cumulative') {
                     // Cumulative
-                    data[cohort].one = precise_round(thirtyDays[0] / divisor, 4) || 0;
-                    data[cohort].two = precise_round((_.reduce(thirtyDays.slice(0, 2), function(sum, num){ return sum + num;})) / divisor, 4) || 0;
-                    data[cohort].three = precise_round((_.reduce(thirtyDays.slice(0, 3), function(sum, num){ return sum + num;})) / divisor, 4) || 0;
-                    data[cohort].four = precise_round((_.reduce(thirtyDays.slice(0, 4), function(sum, num){ return sum + num;})) / divisor, 4) || 0;
-                    data[cohort].five = precise_round((_.reduce(thirtyDays.slice(0, 5), function(sum, num){ return sum + num;})) / divisor, 4) || 0;
-                    data[cohort].six = precise_round((_.reduce(thirtyDays.slice(0, 6), function(sum, num){ return sum + num;})) / divisor, 4) || 0;
-                    data[cohort].seven = precise_round((_.reduce(thirtyDays.slice(0, 7), function(sum, num){ return sum + num;})) / divisor, 4) || 0;
-
-                    for (var i = 0, n = thirtyDays.length; i < Math.min(14, n); i++ ){
-                      total += thirtyDays[i]
-                    }
-                    data[cohort].twoWeek = precise_round(total / divisor, 4) || 0;
-                    total = 0
-                    for (var i = 0, n = thirtyDays.length; i < n; i++ ){
-                      total += thirtyDays[i]
-                    }
-
-                    data[cohort].thirty = precise_round(total / divisor, 4) || 0;
-
+                    if (divisor == 0) {
+                      data[cohort].one = 0;
+                      data[cohort].two = 0;
+                      data[cohort].three = 0;
+                      data[cohort].four = 0;
+                      data[cohort].five = 0;
+                      data[cohort].six = 0;
+                      data[cohort].twoWeek = 0;
+                      data[cohort].thirty = 0;
                     } else {
+                      data[cohort].one = precise_round(thirtyDays[0] / divisor, 4) || 0;
+                      data[cohort].two = precise_round((_.reduce(thirtyDays.slice(0, 2), function(sum, num){ return sum + num;})) / divisor, 4) || 0;
+                      data[cohort].three = precise_round((_.reduce(thirtyDays.slice(0, 3), function(sum, num){ return sum + num;})) / divisor, 4) || 0;
+                      data[cohort].four = precise_round((_.reduce(thirtyDays.slice(0, 4), function(sum, num){ return sum + num;})) / divisor, 4) || 0;
+                      data[cohort].five = precise_round((_.reduce(thirtyDays.slice(0, 5), function(sum, num){ return sum + num;})) / divisor, 4) || 0;
+                      data[cohort].six = precise_round((_.reduce(thirtyDays.slice(0, 6), function(sum, num){ return sum + num;})) / divisor, 4) || 0;
+                      data[cohort].seven = precise_round((_.reduce(thirtyDays.slice(0, 7), function(sum, num){ return sum + num;})) / divisor, 4) || 0;
+
+                      for (var i = 0, n = thirtyDays.length; i < Math.min(14, n); i++ ){
+                        total += thirtyDays[i]
+                      }
+                      data[cohort].twoWeek = precise_round(total / divisor, 4) || 0;
+                      total = 0
+                      for (var i = 0, n = thirtyDays.length; i < n; i++ ){
+                        total += thirtyDays[i]
+                      }
+
+                      data[cohort].thirty = precise_round(total / divisor, 4) || 0;
+                    }
+                  } else {
                     // Day by day
                     data[cohort].one = precise_round(thirtyDays[0] / divisor, 4) || 0;
                     data[cohort].two = precise_round(thirtyDays[1] / divisor, 4) || 0;
