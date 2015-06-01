@@ -198,17 +198,8 @@
                   console.log(values)
                   daysSorted = Object.keys(values).sort();
                   data[cohort].users = divisor
-
-                  thirtyDays = [];
-                  for (var i = 0, n = daysSorted.length; i < n; i++) {
-                    thirtyDays.push(values[daysSorted[i]]);
-                  };
-
-                  var total = 0;
-
-                  if (displayType == 'cumulative') {
-                    // Cumulative
-                    if (divisor == 0) {
+                  debugger
+                  if (divisor == 0) {
                       data[cohort].one = 0;
                       data[cohort].two = 0;
                       data[cohort].three = 0;
@@ -218,6 +209,14 @@
                       data[cohort].twoWeek = 0;
                       data[cohort].thirty = 0;
                     } else {
+                      thirtyDays = [];
+                      for (var i = 0, n = daysSorted.length; i < n; i++) {
+                       thirtyDays.push(values[daysSorted[i]]);
+                     };
+                     var total = 0;
+                    if (displayType == 'cumulative') {
+                      // Cumulative
+                    
                       data[cohort].one = precise_round(thirtyDays[0] / divisor, 4) || 0;
                       data[cohort].two = precise_round((_.reduce(thirtyDays.slice(0, 2), function(sum, num){ return sum + num;})) / divisor, 4) || 0;
                       data[cohort].three = precise_round((_.reduce(thirtyDays.slice(0, 3), function(sum, num){ return sum + num;})) / divisor, 4) || 0;
@@ -236,19 +235,18 @@
                       }
 
                       data[cohort].thirty = precise_round(total / divisor, 4) || 0;
-                    }
-                  } else {
-                    // Day by day
-                    data[cohort].one = precise_round(thirtyDays[0] / divisor, 4) || 0;
-                    data[cohort].two = precise_round(thirtyDays[1] / divisor, 4) || 0;
-                    data[cohort].three = precise_round(thirtyDays[2] / divisor, 4) || 0;
-                    data[cohort].four = precise_round(thirtyDays[3] / divisor, 4) || 0;
-                    data[cohort].five = precise_round(thirtyDays[4] / divisor, 4) || 0;
-                    data[cohort].six = precise_round(thirtyDays[5] / divisor, 4) || 0;
-                    data[cohort].seven = precise_round(thirtyDays[6] / divisor, 4) || 0;
-                    data[cohort].twoWeek = precise_round(thirtyDays[13] / divisor, 4) || 0;
-                    data[cohort].thirty = precise_round(thirtyDays[29] / divisor, 4) || 0;
-                   }
+                    } else {
+                      // Day by day
+                      data[cohort].one = precise_round(thirtyDays[0] / divisor, 4) || 0;
+                      data[cohort].two = precise_round(thirtyDays[1] / divisor, 4) || 0;
+                      data[cohort].three = precise_round(thirtyDays[2] / divisor, 4) || 0;
+                      data[cohort].four = precise_round(thirtyDays[3] / divisor, 4) || 0;
+                      data[cohort].five = precise_round(thirtyDays[4] / divisor, 4) || 0;
+                      data[cohort].six = precise_round(thirtyDays[5] / divisor, 4) || 0;
+                      data[cohort].seven = precise_round(thirtyDays[6] / divisor, 4) || 0;
+                      data[cohort].twoWeek = precise_round(thirtyDays[13] / divisor, 4) || 0;
+                      data[cohort].thirty = precise_round(thirtyDays[29] / divisor, 4) || 0;
+                     }
 
                 })
                 console.log(data)
