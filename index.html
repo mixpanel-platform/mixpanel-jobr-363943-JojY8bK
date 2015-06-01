@@ -376,7 +376,7 @@
             while (currentDate < dateRange.to) {
               var timestamp = Math.floor(currentDate.getTime() / 1000);
               var whereString = '(number(properties["Time of Registration"]) >=' + timestamp + ' and number(properties["Time of Registration"]) <=' + (timestamp + 86400) + ' ' + swipeType +')';
-              var whereDivString = '(number(properties["Time of Signup"]) >=' + timestamp + ' and number(properties["Time of Signup"]) <=' + (timestamp + 86400) + ' ' + swipeType +')';
+              var whereDivString = '(number(properties["Time of Signup"]) >=' + timestamp + ' and number(properties["Time of Signup"]) <=' + (timestamp + 86400))';
               var params = {
                 type: 'general',
                 where: whereString,
